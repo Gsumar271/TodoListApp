@@ -20,7 +20,7 @@ import android.util.Log;
 public class TodoContentProvider extends ContentProvider{
 
     public static final Uri CONTENT_URI =
-            Uri.parse("content://com.eugenesumaryev.todoscontentprovider/todoitems");
+            Uri.parse("content://com.todoscontentprovider/todoitems");
 
     public static final String KEY_ID = "_id";
     public static final String KEY_TASK = "task";
@@ -54,8 +54,8 @@ public class TodoContentProvider extends ContentProvider{
     //represents a single row.
     static {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-        uriMatcher.addURI("com.eugenesumaryev.todoscontentprovider", "todoitems", ALLROWS);
-        uriMatcher.addURI("com.eugenesumaryev.todoscontentprovider", "todoitems/#", SINGLE_ROW);
+        uriMatcher.addURI("com.todoscontentprovider", "todoitems", ALLROWS);
+        uriMatcher.addURI("com.todoscontentprovider", "todoitems/#", SINGLE_ROW);
     }
 
     @Override
