@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by eugenesumaryev on 10/20/17.
+ * Created on 10/20/17.
  */
 public class TodoItem {
 
