@@ -1,4 +1,4 @@
-package com.eugenesumaryev.floatingbuttons;
+package com.todolistapp;
 
 import android.content.Context;
 import android.graphics.Color;
