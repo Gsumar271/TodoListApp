@@ -1,4 +1,4 @@
-package com.eugenesumaryev.floatingbuttons;
+package com.todolistapp;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -21,7 +21,7 @@ import java.util.Date;
 
 
 /**
- * Created by eugenesumaryev on 10/21/17.
+ * Created on 10/21/17.
  */
 public class NewDialogFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
@@ -54,13 +54,12 @@ public class NewDialogFragment extends Fragment implements AdapterView.OnItemSel
         Bundle args = new Bundle();
 
         todoItem = _todo;
-       // SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
         String dateString = sdf.format(todoItem.getCreated());
         String todoText = todoItem.getTask();
-       // Log.v("TodoFromNDF ", todoText);
+
         String noteText = todoItem.getNote();
-     //   Log.v("AndnoteTEXT ", noteText);
+
         int priorityLevel = todoItem.getPriority();
         String dueDateString = sdf.format(todoItem.getDueDate());
 
@@ -70,8 +69,6 @@ public class NewDialogFragment extends Fragment implements AdapterView.OnItemSel
         args.putInt(DIALOG_PRIORITY, priorityLevel);
         args.putString(DIALOG_DUEDATE, dueDateString);
         fragment.setArguments(args);
-
-        Log.v("priortyNwInstnceNDF : ", Integer.toString(todoItem.getPriority()));
 
         return fragment;
     }
@@ -84,9 +81,9 @@ public class NewDialogFragment extends Fragment implements AdapterView.OnItemSel
 
         String newTodo = getArguments().getString(DIALOG_TODO);
         int stringLimit = (newTodo.length()<10) ? newTodo.length() : 10;
-        //newTodo = newTodo.trim().substring(0, stringLimit);
+
         String newNote = getArguments().getString(DIALOG_NOTE);
-        //final String[] modNote = newNote.split("\n", 2);
+
         String newDueDate = getArguments().getString(DIALOG_DUEDATE);
         newPriorityLevel = getArguments().getInt(DIALOG_PRIORITY);
         String newDueDateString = getArguments().getString(DIALOG_DUEDATE);
@@ -96,15 +93,7 @@ public class NewDialogFragment extends Fragment implements AdapterView.OnItemSel
 
         editabletext = (EditText)view.findViewById(R.id.editableTodoText);
         editabletext.setOnFocusChangeListener(new OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (hasFocus) {
-                   // editabletext.setText(modNote[0]);
-                } else {
 
-                }
-            }
-        });
 
         if (newTodo == "")
             editabletext.setEnabled(false);
@@ -162,7 +151,6 @@ public class NewDialogFragment extends Fragment implements AdapterView.OnItemSel
         cancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // When cancelButton is clicked, just return.
-                // dismiss();
                 onUpdateClickedListener.cancelActivity();
             }
         });
@@ -178,7 +166,6 @@ public class NewDialogFragment extends Fragment implements AdapterView.OnItemSel
         super.onAttach(activity);
 
         try{
-            // onDateClickedListener = (OnDateClickedListener)activity;
             onUpdateClickedListener = (OnUpdateClickedListener)getActivity();
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString() +
