@@ -185,15 +185,6 @@ public class MainActivity extends AppCompatActivity implements TodoFragment.OnNe
 
         ta.notifyDataSetChanged();
 
-        /*
-        TodoFragment tdf =
-                (TodoFragment) getFragmentManager().findFragmentById(R.id.TodoFragment);
-
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.detach(tdf).attach(tdf).commit();
-        */
-
-
     }
 
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -207,12 +198,6 @@ public class MainActivity extends AppCompatActivity implements TodoFragment.OnNe
 
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 
-        /*
-        ContentResolver cr = getContentResolver();
-        String where = TodoContentProvider.KEY_CAT + "=?";
-        Cursor query = cr.query(TodoContentProvider.CONTENT_URI, null, where, new String [] {newCategory}, null);
-
-        */
         int keyTaskIndex = cursor.getColumnIndexOrThrow(TodoContentProvider.KEY_TASK);
         int keyNoteIndex = cursor.getColumnIndexOrThrow(TodoContentProvider.KEY_NOTE);
         int keyPriorityIndex = cursor.getColumnIndexOrThrow(TodoContentProvider.KEY_PRIORITY);
@@ -300,10 +285,6 @@ public class MainActivity extends AppCompatActivity implements TodoFragment.OnNe
             // while(query.moveToNext())
             cr.delete(TodoContentProvider.CONTENT_URI, where, whereArgs);
         }
-
-
-        // todoItems.remove(position);
-        // ta.notifyDataSetChanged();
 
         query.close();
 
