@@ -1,4 +1,4 @@
-package com.eugenesumaryev.floatingbuttons;
+package com.todolistapp;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
@@ -16,7 +16,7 @@ import java.util.Date;
 
 
 /**
- * Created by eugenesumaryev on 10/20/17.
+ * Created on 10/20/17.
  */
 public class DetailsActivity extends Activity implements NewDialogFragment.OnUpdateClickedListener,
 CalendarFragment.DateChangedListener
@@ -33,15 +33,14 @@ CalendarFragment.DateChangedListener
 
             // During initial setup, plug in the details fragment.
             String newTodo = getIntent().getExtras().getString("todo");
-            //Log.v("Todofromdetails: ", newTodo);
+
             TodoItem newTodoItem = new TodoItem(newTodo);
-             //Log.v("Todofromdetails: ", newTodoItem.getTask());
+
             newTodoItem.note = getIntent().getExtras().getString("note");
-           // newTodoItem.note = "";
-             // Log.v("Noetfromdetails: ", newTodoItem.getNote());
+
             newTodoItem.created = Long.parseLong(getIntent().getExtras().getString("date"));
             newTodoItem.priority = getIntent().getExtras().getInt("priority");
-           // SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
              SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
             try {
                 newTodoItem.dueDate = sdf.parse(getIntent().getExtras().getString("dueDate"));
@@ -92,9 +91,6 @@ CalendarFragment.DateChangedListener
         result.putExtra("note", noteText);
         result.putExtra("priority", priorityLevel);
         result.putExtra("dueDate", dueDateString);
-
-      //  Log.v("ToDoItemSecond ", todoText);
-        Log.v("priorityinDetails : ", Integer.toString(priorityLevel));
 
         setResult(RESULT_OK, result);
         finish();
