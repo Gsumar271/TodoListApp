@@ -56,21 +56,9 @@ CalendarFragment.DateChangedListener
     }
 
 
-    public void onDateClicked(View v){
-
-        /*
-        DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getFragmentManager(), "datePicker");
-        */
-
-
-    }
-
     public void onCalendarClicked(View v) {
 
 
-
-       // startActivityForResult(new Intent(Intent.ACTION_PICK).setDataAndType(null, CalendarActivity.MIME_TYPE), 100);
         CalendarFragment cf = new CalendarFragment();
         getFragmentManager().beginTransaction().replace(R.id.fragment_container, cf).addToBackStack(null).commit();
 
@@ -81,22 +69,13 @@ CalendarFragment.DateChangedListener
 
     public void onNewDateSelected(Date dateSelected)
     {
-        /*
-        DialogFragment df = (DialogFragment)
-                getFragmentManager().findFragmentByTag(tag);
-
-        df.updateDate(dateSelected);
-        */
 
     }
 
 
     public void updateActivity(TodoItem note) {
         // TODO Auto-generated method stub
-
-
-
-      //  SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
         setNewDueDate(sdf.format(note.getDueDate()));
         String dateString = String.valueOf((note.getCreated()));
@@ -105,8 +84,6 @@ CalendarFragment.DateChangedListener
         int priorityLevel = note.getPriority();
 
         String dueDateString = getNewDueDate();
-       // Log.v("priority: ", Integer.toString(priorityLevel));
-
 
 
         Intent result = new Intent();
@@ -139,25 +116,6 @@ CalendarFragment.DateChangedListener
 
         return true;
     }
-
-/*
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode==RESULT_OK) {
-            int year = data.getIntExtra("year", 0);
-            int month = data.getIntExtra("month", 0) ;
-            int day = data.getIntExtra("day", 0);
-            final Calendar dat = Calendar.getInstance();
-            dat.set(Calendar.YEAR, year);
-            dat.set(Calendar.MONTH, month);
-            dat.set(Calendar.DAY_OF_MONTH, day);
-
-            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
-            Toast.makeText(DetailsActivity.this, sdf.format(dat.getTime()), Toast.LENGTH_LONG).show();
-
-        }
-    }
- */
 
 
     @Override
