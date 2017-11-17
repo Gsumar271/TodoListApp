@@ -1,4 +1,4 @@
-package com.eugenesumaryev.floatingbuttons;
+package com.todolistapp;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -15,7 +15,7 @@ import android.util.Log;
 
 
 /**
- * Created by eugenesumaryev on 10/20/17.
+ * Created on 10/20/17.
  */
 public class TodoContentProvider extends ContentProvider{
 
