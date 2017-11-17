@@ -36,13 +36,6 @@ public class NewDialogFragment extends Fragment implements AdapterView.OnItemSel
     private static TodoItem todoItem;
     private boolean returned;
 
-	/*
-	public interface OnDateClickedListener {
-        public void onDateClicked(View v);
-    }
-
-	private OnDateClickedListener onDateClickedListener;
-	*/
 
     public interface OnUpdateClickedListener {
         public void updateActivity(TodoItem note);
@@ -98,9 +91,6 @@ public class NewDialogFragment extends Fragment implements AdapterView.OnItemSel
         newPriorityLevel = getArguments().getInt(DIALOG_PRIORITY);
         String newDueDateString = getArguments().getString(DIALOG_DUEDATE);
 
-        //noteditabletext = (TextView)view.findViewById(R.id.notEditableTodoText);
-        //noteditabletext.setText(newTodo);
-
         noteText = (EditText)view.findViewById(R.id.content_text);
         noteText.setText(newNote);
 
@@ -115,7 +105,6 @@ public class NewDialogFragment extends Fragment implements AdapterView.OnItemSel
                 }
             }
         });
-       // Log.v("Todofromndf: ", newTodo.toString());
 
         if (newTodo == "")
             editabletext.setEnabled(false);
@@ -134,13 +123,6 @@ public class NewDialogFragment extends Fragment implements AdapterView.OnItemSel
         else
             tv.setText("Due Date: " + newDueDate);
 
-        /*
-        subTask = (TextView)view.findViewById(R.id.mySubtaskText);
-        subTask.setText("1. " + "SubTask 1 " + "\n" + "2. " + "SubTask 2 ");
-        */
-
-
-
         Spinner spinner = (Spinner) view.findViewById(R.id.priority_spinner);
         //Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
@@ -151,22 +133,7 @@ public class NewDialogFragment extends Fragment implements AdapterView.OnItemSel
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
         spinner.setSelection(newPriorityLevel);
-        Log.v("newpriorLevelARGS : ", Integer.toString(newPriorityLevel));
 
-
-
-
-        /*
-        //Calendar button
-        Button dateButton = (Button)view.findViewById(R.id.button_id2);
-        dateButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Log.v("Note: ", "XXXXX");
-                // onDateClickedListener.onDateClicked(v);
-                onUpdateClickedListener.onDateClicked(v);
-            }
-        });
-        */
 
         //SetDate button to set up due date
         Button calButton = (Button)view.findViewById(R.id.button_id2);
@@ -183,15 +150,10 @@ public class NewDialogFragment extends Fragment implements AdapterView.OnItemSel
                 //okClicked;
                 //Activity will populate selected note with info
 
-             //   Log.v("OKPRESSEDDUEDATE: ", todoItem.dueDate.toString());
                 todoItem.task = editabletext.getText().toString();
                 todoItem.note = noteText.getText().toString();
-
-                //  onUpdateClickedListener = (OnUpdateClickedListenetodotActivity();
-                Log.v("prrtyNewPrLvltNDF : ", Integer.toString(newPriorityLevel));
-                Log.v("prrtywhenOkpresdNDF : ", Integer.toString(todoItem.priority));
+		    
                 onUpdateClickedListener.updateActivity(todoItem);
-                // dismiss();
 
             }
         });
@@ -201,7 +163,6 @@ public class NewDialogFragment extends Fragment implements AdapterView.OnItemSel
             public void onClick(View v) {
                 // When cancelButton is clicked, just return.
                 // dismiss();
-                //  onUpdateClickedListener = (OnUpdateClickedListener)getActivity();
                 onUpdateClickedListener.cancelActivity();
             }
         });
@@ -229,9 +190,6 @@ public class NewDialogFragment extends Fragment implements AdapterView.OnItemSel
                                int pos, long id) {
         //An item was selected. You can retrieve the selected item using
         String selection = (String) parent.getItemAtPosition(pos);
-        Log.v("position : ", selection);
-
-        Log.v("priorityBeforeFrst : ", Integer.toString(todoItem.priority));
 
 
 
@@ -239,27 +197,21 @@ public class NewDialogFragment extends Fragment implements AdapterView.OnItemSel
             todoItem.priority = 2;
         else if (selection.equals("MEDIUM")) {
             todoItem.priority = 1;
-           // Log.v("prioritychanged : ", Integer.toString(todoItem.priority));
         }
         else
             todoItem.priority = 0;
-      //  Log.v("selection : ", selection);
-
-       Log.v("priorityFirstNDF : ", Integer.toString(todoItem.priority));
-
 
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
         //An item was selected. You can retrieve the selected item using
         parent.setSelection(newPriorityLevel);
-        Log.v("NTHNGSELCTDPRIORLVL: ", Integer.toString(newPriorityLevel));
 
     }
 
 
     public void updateDate(Date newDate) {
-        //tv.setText("Due Date: " + newDate);
+	    
         todoItem.dueDate = newDate;
         returned = true;
 
