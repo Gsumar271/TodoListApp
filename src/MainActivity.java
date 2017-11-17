@@ -1,4 +1,4 @@
-package com.eugenesumaryev.floatingbuttons;
+package com.todolistapp;
 
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -47,8 +47,6 @@ public class MainActivity extends AppCompatActivity implements TodoFragment.OnNe
             @Override
             public void onClick(View view) {
                 TodoItem newTodoItem = new TodoItem("newItem");
-                // todoItems.add(0, newToDoItem);
-                // ta.notifyDataSetChanged();
 
                 startDetailsActivity(newTodoItem);
             }
@@ -75,9 +73,7 @@ public class MainActivity extends AppCompatActivity implements TodoFragment.OnNe
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        //	Log.v("ResultCode: ", String.valueOf(requestCode));
-
+            
         if (resultCode == Activity.RESULT_OK) {
 
             String taskItem = data.getExtras().getString("todo");
@@ -90,18 +86,15 @@ public class MainActivity extends AppCompatActivity implements TodoFragment.OnNe
             newTodoItem.note = noteItem;
             newTodoItem.created = Long.parseLong(dateItem);
             newTodoItem.priority = priority;
-            Log.v("rtndprioritychanged : ", Integer.toString(priority));
-           // SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
             try {
                 newTodoItem.dueDate = sdf.parse(dueDate);
-               // Log.v("SECONDDUEDATE: ", newTodoItem.dueDate.toString());
-               // Log.v("ToDoItemThird ", newTodoItem.note);
+
             } catch (ParseException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-           // Log.v("ToDoItemThird ", newTodoItem.task);
             updateActivity(newTodoItem);
 
         }
@@ -111,8 +104,6 @@ public class MainActivity extends AppCompatActivity implements TodoFragment.OnNe
     //Starts the DetailsActivity using the Intent
     private void startDetailsActivity(TodoItem todoItem){
 
-
-      //  SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
         Intent intent = new Intent();
         intent.setClass(MainActivity.this, DetailsActivity.class);
@@ -121,8 +112,7 @@ public class MainActivity extends AppCompatActivity implements TodoFragment.OnNe
         intent.putExtra("date", String.valueOf(todoItem.getCreated()));
         intent.putExtra("priority", todoItem.getPriority());
         intent.putExtra("dueDate", sdf.format((todoItem.getDueDate())));
-      //  Log.v("DateCreatedFirst ", String.valueOf(todoItem.getCreated()));
-      //  Log.v("ToDoItemFirst ", todoItem.getTask() );
+
         startActivityForResult(intent, 1);
 
     }
@@ -134,18 +124,15 @@ public class MainActivity extends AppCompatActivity implements TodoFragment.OnNe
         //if matches, update it
         //Update database
 
-       // SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy  HH:mm:ss");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String newTask = noteItem.getTask();
         String newNote = noteItem.getNote();
         long created = noteItem.getCreated();
-        //String createdString = sdf.format(created);
 
         int priority = noteItem.getPriority();
         Date dueDate = noteItem.getDueDate();
         String dueDateString = sdf.format(dueDate);
 
-      //  Log.v("priorityInUpdtingAct : ", Integer.toString(priority));
         ContentResolver cr = getContentResolver();
         ContentValues values = new ContentValues();
 
@@ -158,8 +145,6 @@ public class MainActivity extends AppCompatActivity implements TodoFragment.OnNe
 
         String where = TodoContentProvider.KEY_CREATION_DATE + " = " + created;
 
-       // Log.v("DateCreatedSecond ", String.valueOf(created));
-
         //If note is new, insert it into provider, if not then update it
         Cursor query = cr.query(TodoContentProvider.CONTENT_URI, null, where, null, null);
 
@@ -168,15 +153,7 @@ public class MainActivity extends AppCompatActivity implements TodoFragment.OnNe
         else
             cr.update(TodoContentProvider.CONTENT_URI, values, where, null);
 
-
-       // ta.notifyDataSetChanged();
-
         query.close();
-       // ta.notifyDataSetChanged();
-
-
-
-        //getLoaderManager().initLoader(1, null, this);
 
 
         getLoaderManager().restartLoader(1, null, this);
@@ -221,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements TodoFragment.OnNe
                 }
 
                 todoItems.add(newItem);
-              //  Log.v("ToDoItemFourth ", newItem.getTask());
+
             }
             ta.notifyDataSetChanged();
         }
@@ -282,7 +259,6 @@ public class MainActivity extends AppCompatActivity implements TodoFragment.OnNe
         Cursor query = cr.query(TodoContentProvider.CONTENT_URI, null, where, whereArgs, null);
 
         if (query.getCount() != 0) {
-            // while(query.moveToNext())
             cr.delete(TodoContentProvider.CONTENT_URI, where, whereArgs);
         }
 
