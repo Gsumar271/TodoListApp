@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by eugenesumaryev on 10/20/17.
+ * Created on 10/20/17.
  */
 public class TodoItemAdapter extends ArrayAdapter<TodoItem> {
 
@@ -63,7 +63,6 @@ public class TodoItemAdapter extends ArrayAdapter<TodoItem> {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
         String dateString = sdf.format(createdDate);
         String dueDateString = sdf.format(dueDate);
-     //   Log.v("priorityShow : ", Integer.toString(priorityLevel));
 
         if (convertView == null) {
             todoView = new LinearLayout(getContext());
@@ -74,10 +73,6 @@ public class TodoItemAdapter extends ArrayAdapter<TodoItem> {
         } else {
             todoView = (LinearLayout) convertView;
         }
-
-      //  TextView taskView = (TextView)todoView.findViewById(android.R.id.text1);
-      //  taskView.setText(taskString);
-
 
         TextView dateView = (TextView)todoView.findViewById(R.id.duedate);
         TextView taskView = (TextView)todoView.findViewById(R.id.todoText);
@@ -96,11 +91,7 @@ public class TodoItemAdapter extends ArrayAdapter<TodoItem> {
                     }
                 });
 
-        //taskView.setText(taskString);
 
-       // dateView.setText("date here");
-      //  taskView.setText("the blue text");
-      //  Log.v("ToDoItemFifth ", taskString);
         noteListView.setText(taskString);
         buttonView.setText(dueDateString);
         switch (priorityLevel) {
@@ -114,23 +105,6 @@ public class TodoItemAdapter extends ArrayAdapter<TodoItem> {
                 imageView.setBackgroundColor(Color.RED);
                 break;
         }
-
-
-
-
-        // buttonView.setText("button");
-
-        //todoView.requestFocus();
-
-	    /*
-	    TextView dateView = (TextView)todoView.findViewById(R.id.rowDate);
-	    TextView taskView = (TextView)todoView.findViewById(R.id.row);
-	    TextView priorityView = (TextView)todoView.findViewById(R.id.row2);
-
-	    dateView.setText(dateString);
-	    taskView.setText(noteString);
-	    priorityView.setText(noteString);
-	    */
 
 
         return todoView;
